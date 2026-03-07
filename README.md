@@ -1,4 +1,39 @@
-# Driver Drowsiness Detection
+# Drowsy Driver Detection System (English)
+
+## Description
+Neural network-based system for detecting drowsy drivers.  
+Implements a full video pipeline: face detection → eye state classification → alert signal.  
+Serves as a prototype for real driver monitoring systems using computer vision and deep learning.
+
+## Experiments
+- **Full frames:** trained on entire video frames — low accuracy, sensitive to background.  
+- **Eye crops:** trained on eye regions — high accuracy on static images, unstable on real video (lighting, head rotation, partial occlusion).  
+
+**Final approach:** classification on full face crops using **MobileNetV2** with pre-trained ImageNet weights.  
+- Binary classification: `0` — eyes open, `1` — eyes closed  
+- Base layers frozen to avoid overfitting  
+
+## Face Detection & Pipeline
+- **OpenCV DNN (SSD + ResNet)** for face localization  
+- Same detector used for training and real-time video  
+- Ensures input consistency and stable performance
+
+## Tools
+- TensorFlow / Keras — model training  
+- OpenCV — video processing & visualization  
+- Roboflow Drowsiness Detection Dataset — training & validation  
+- Keras Callbacks, class weights — training control
+
+## Key Findings
+- Stable eye state classification  
+- Balance between accuracy and computational efficiency  
+- Temporal aggregation distinguishes blinks from drowsiness  
+- Real-time eye detection not required due to instability
+
+## Conclusion
+Prototype demonstrates integration of computer vision and deep learning into practical driver monitoring solutions.
+
+# Система распознавания засыпающего водителя (Русский)
 
 ## Описание проекта
 Проект представляет собой нейросетевую систему распознавания засыпающего водителя.  
